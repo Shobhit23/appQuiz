@@ -1,0 +1,41 @@
+<div class="container col-md-8" style="margin-top:50px;">
+    
+    <form (ngSubmit)="submit()" [formGroup]="myForm" autocomplete="off">
+        <h1>Please choose your preferences for quiz</h1>
+        <br>
+        <div class="form-group">
+          <label for="numberOfQuestions">Number of Questions :</label>
+          <input type="number" formControlName="numberOfQuestions" class="form-control" id="numberOfQuestions" name="numberOfQuestions" #numberOfQuestions>
+        <div *ngIf="myForm.get('numberOfQuestions').errors?.required" class="text-danger">Invalid</div>
+        <div *ngIf="myForm.get('numberOfQuestions').errors?.min" class="text-danger">Must be greater than 0</div>
+        <div *ngIf="myForm.get('numberOfQuestions').errors?.max" class="text-danger">Must be less than 31</div>
+        </div>
+        <div class="form-group">
+          <label for="category">Category :</label>
+            <select  formControlName="category" class="form-control" id="category" name="category" #category>
+              <option *ngFor="let category of categoryList" selected [value]=category.id>{{category.name}}</option>
+              </select>
+              <div *ngIf="myForm.get('category').errors?.required" class="text-danger">*Required</div>
+          </div>
+        <div class="form-group">
+          <label for="difficulty">Difficulty :</label>
+            <select  formControlName="difficulty" class="custom-select" id="difficulty" name="difficulty" #difficulty>
+              <!-- <option [ngValue]="undefined" hidden>Difficulty Level</option> -->
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+              </select>
+              <div *ngIf="myForm.get('difficulty').errors?.required" class="text-danger">*Required</div>
+          </div>
+
+          <h6 class="text-danger font-italic">**Kindly note that you will be alloted a time of 10 seconds for each question</h6>
+        
+        <button type="submit" class="btn btn-primary" [disabled]="!myForm.valid">Take Quiz</button>
+      </form>
+
+
+
+
+</div>
+
+

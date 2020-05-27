@@ -1,0 +1,32 @@
+<div class="container col-md-8" style="margin-top: 100px;">
+    
+        <h1 > Your Score is {{score}}/{{correctAnswers.length}} in {{totalTime}} seconds</h1>
+        <h2 *ngIf="score > correctAnswers.length/4" class="text-success">Congratulations!! You have passed the test</h2>
+        <h2 *ngIf="!(score > correctAnswers.length/4)" class="text-danger">Oh No! You failed. Please Try Again</h2>
+        <button class="btn btn-primary" (click)=toHome()>Take Quiz Again</button>
+        
+        <br>
+        <br>
+        <br>
+
+        <table class="table table-hover table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Question</th>
+                    <th scope="col">Your Answer</th>
+                    <th scope="col">Correct Answer</th>
+                  </tr>
+                </thead>
+                <tbody *ngFor="let correct of correctAnswers;index as i">
+                  <tr [ngStyle]="{'background-color': (selected[i]==correct) ? 'green' : 'red'}">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{questions[i]}}</td>
+                    <td>{{selected[i]}}</td>
+                    <td>{{correct}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+
+</div>

@@ -1,0 +1,30 @@
+<div class="container col-md-8" style="text-align: right;font-size: 80px;">
+  <app-clock (finish)="submit()" *ngIf="fetchStatus"></app-clock>
+</div>
+<div class="container col-md-8" style="margin-top: 40px;">
+<div *ngIf="!resultList[counter]">
+  Loading...
+  <br>
+  <br>
+  <br>
+  <button (click)="toHome()" class="btn btn-primary">Click here to start again if not loaded in 5 seconds.</button>
+</div>
+<div class="card mb-3" style="max-width: 540px;" *ngIf="resultList[counter] && fetchStatus">
+    <div class="card-body" style="height:100px">
+      <p class="card-text">
+          {{counter+1}}). {{resultList[counter].question}}
+      </p>
+    </div>
+    <ul class="list-group list-group-flush" *ngFor="let option of resultList[counter].options">
+      <li class="list-group-item" *ngIf="option && !selected" (click)="show(option,counter)" id="option">>> {{option}}</li>
+      <li class="list-group-item" *ngIf="selected" (click)="show(option,counter)"
+      [ngStyle]="{'background-color': (option==selected[counter]) ? 'lightgrey' : 'white'}" id="option">>> {{option}}</li>
+    </ul>
+    <div class="card-body">
+      <a class="card-link"><button (click)="previous()" class="btn btn-secondary">Previous</button></a>
+      <button style="text-align: center;" type="button" class="btn btn-success" (click)="submit()">Submit</button>
+      <a class="card-link" style="float: right;"><button (click)="next()" class="btn btn-secondary">Next</button></a>
+    </div>
+  </div>
+
+  </div>

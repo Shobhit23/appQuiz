@@ -1,0 +1,25 @@
+<div class="container col-md-6" style="margin-top: 100px;">
+  <h1>Registration Form</h1>
+  <a (click)="toLogin()" class="toNewUser text-success" style="color: black;cursor: pointer;" *ngIf="toggle"><h6>Registered Successfully. Click here to Login.</h6></a>
+        <form [formGroup]="myRegisterForm" (ngSubmit)="submit()">
+        <div class="form-group">
+          <label for="username">Username :</label>
+          <input type="text" class="form-control" id="username" placeholder="Enter Username" formControlName="username">
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <div *ngIf="myRegisterForm.get('username').errors?.required && myRegisterForm.get('username').dirty" class="text-danger">*Required</div>
+        </div>
+        <div class="form-group">
+          <label for="password">Password :</label>
+          <input [type]="show ? 'text' : 'password'" class="form-control" id="password" placeholder="Password" formControlName="password">
+          <div *ngIf="!myRegisterForm.get('password').errors?.required">
+            <input (click)="password()" type="checkbox" *ngIf="!show"><span *ngIf="!show">Show Password</span>
+            <input (click)="password()" type="checkbox" *ngIf="show"><span *ngIf="show">Hide Password</span>
+          </div>
+          <div *ngIf="myRegisterForm.get('password').errors?.required && myRegisterForm.get('password').dirty" class="text-danger">*Required</div>
+        </div>
+        <a (click)="toLogin()" class="toNewUser" style="color: black;cursor: pointer;" *ngIf="!toggle"><h6>Already Registered?</h6></a>
+        <button type="submit" class="btn btn-primary" [disabled]="!myRegisterForm.valid">Register</button>
+        <br>
+        <br>
+      </form>
+</div>
